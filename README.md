@@ -1,2 +1,2 @@
 # olibuild
-contains `olibuild` and `olibuildc` which are both makefiles for general (small) C++ and C projects respectively
+contains `olibuildcpp` and `olibuildc` which are both makefiles for general (small) C++ and C projects respectively
