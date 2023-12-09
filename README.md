@@ -48,6 +48,20 @@ int main() {
 }
 ```
 
+You might also want to create a script that sets up a lot of this for you, for example, I use this script:
+```sh
+#!/bin/sh
+
+sudo cp ~/.make/olibuild ./    # olibuildcpp is stored here
+sudo mv ./olibuild ./Makefile  # rename to Makefile
+sudo chmod a+wrx ./Makefile    # set permissions (you need to do this)
+sudo make init                 # initialisew with main.cpp etc.
+cd include                     # copy contents of olibuildsd into
+olibuildstd                    # the cwd which is ./include
+sudo chmod a+wrx ./*           # set permissions
+cd ..                          # return!
+```
+
 ## `make help`
 
 Displays help information about olibuildc
