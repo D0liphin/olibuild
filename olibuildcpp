@@ -11,7 +11,7 @@ SRC=. ./src ./include
 # all extensions that should be considered as C++ source files
 SRC_EXTS=cpp cxx cc
 # the C++ standard to use
-STD=c++11
+STD=c++23
 # *************************************************************************** #
 
 # some ANSI escape codes
@@ -23,7 +23,9 @@ RESET=\033[0m
 # the compiler to be used
 CC=g++
 # flags for compiling translation units
-CFLAGS=-std=$(STD) -Wall -Wextra -g $(foreach dir, $(INCLUDE),-I $(dir))
+CFLAGS=-std=$(STD) -Wall -Wextra -g -fsanitize=undefined $(foreach dir, $(INCLUDE),-I $(dir))
+# flags for linking
+LFLAGS=-fsanitize=undefined
 # where all generated files are stored
 TARGET=./target
 # name of the built executable
@@ -66,7 +68,7 @@ $(TARGET)/main: $(O_FILES) Makefile
 	@mkdir -p $(TARGET)
 # only compile if there is actually something to compile
 ifdef CPP_FILES
-	$(CC) -o $(TARGET)/$(EXEC) $(O_FILES)
+	$(CC) $(LFLAGS) -o $(TARGET)/$(EXEC) $(O_FILES)
 	@echo "$(GREEN)***$(RESET) done! \(^-^)/ $(GREEN)***$(RESET)"
 else
 	@echo "$(RED)Error$(RESET): no source files found -- nothing to build!\
